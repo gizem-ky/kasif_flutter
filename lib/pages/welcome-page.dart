@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kasif/pages/login-page.dart';
+import 'package:kasif/pages/register-page.dart';
 
 class welcomePage extends StatefulWidget {
   const welcomePage({super.key});
@@ -15,22 +17,34 @@ class _welcomePageState extends State<welcomePage> {
     padding: EdgeInsets.symmetric(vertical: 0),
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () => print("Sign-up Pressed"),
+      onPressed: () {
+          // Butona tıklandığında sign-up sayfasına yönlendirme
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SignUpPage()),
+          );
+        },
       child: Text("SIGN-UP"),
     ),
     );
-}
+  }
 
 Widget buildLoginBtn() {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 0),
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () => print("Login Pressed"),
+      onPressed: () {
+          // Butona tıklandığında sign-up sayfasına yönlendirme
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+          );
+        },
       child: Text("LOGIN"),
     ),
     );
-}
+  }
 
 
 
@@ -43,19 +57,15 @@ Widget buildLoginBtn() {
           children: <Widget>[
             Container(
               height: double.infinity,
-              width: double.infinity,
+              width: double.infinity,              
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0x6600004c),
-                    Color(0x9900004c),
-                    Color(0xcc00004c),
-                    Color(0xff00004c),
-                  ]
-                )
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/logo.jpg"),
+                  
+                ),
               ),
+              
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(
@@ -65,42 +75,21 @@ Widget buildLoginBtn() {
                 child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(height: 320),
                   Text(
-                    'Welcome',
+                    'welcome..',
                     style: TextStyle(
-                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.black87,
                       fontSize: 40,
-                      fontWeight: FontWeight.bold
+                      fontWeight: FontWeight.normal
                     ),
                   ),
-                  SizedBox(height: 450),
-                  Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Handle sign-up button press
-                            },
-                            child: Text('Sign-up'),
-                          ),
-                          SizedBox(width: 35), // Add some spacing between the buttons
-                          ElevatedButton(
-                            onPressed: () {
-                              // Handle login button press
-                              //Navigator.pushNamed(context, '.\lib\pages\login-page.dart');
-                            },
-                            child: Text('Login'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                  //SizedBox(height: 50),
-                  //buildLoginBtn(),
-                  //buildSignUpBtn(),
+                  SizedBox(height: 130),
+                 
+                  buildLoginBtn(),
+                  SizedBox(height: 10),
+                  buildSignUpBtn(),
                 ],
               ),
               ),

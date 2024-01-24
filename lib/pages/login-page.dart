@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
+import 'package:kasif/pages/register-page.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -171,7 +172,12 @@ Widget buildLoginBtn() {
 
 Widget buildSignUpBtn () {
   return GestureDetector(
-    onTap:() => print('Sing Up Pressed'),
+    onTap:(){
+      Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SignUpPage()),
+            );
+    },
       child: RichText(
       text: TextSpan(
         children: [
