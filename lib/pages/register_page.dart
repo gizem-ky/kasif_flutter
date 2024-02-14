@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kasif/core/service/i_auth_service.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -165,11 +167,15 @@ Widget buildconfirmPassword() {
 }
 
 Widget buildSignUpBtn() {
+  final _authService = Provider.of<IAuthService>(context, listen: false);
   return Container(
     padding: EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
-    child: ElevatedButton(
-      onPressed: () => print("Sign-up Pressed"),
+    child: MaterialButton(
+      onPressed: () async {
+        await _authService.createUserWithEmailAndPassword(
+          email: "gizem@gmail.com", password: "123456789");
+      },
       child: Text("SIGN-UP"),
     ),
     );

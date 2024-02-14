@@ -1,19 +1,38 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kasif/pages/login-page.dart';
-import 'package:kasif/pages/register-page.dart';
-import 'package:kasif/pages/welcome-page.dart';
+import 'package:kasif/core/model/app_user.dart';
+import 'package:kasif/core/service/firebase_service.dart';
+import 'package:kasif/core/service/i_auth_service.dart';
+import 'package:kasif/core/widgets/auth_widget.dart';
+import 'package:kasif/core/widgets/auth_widget_builder.dart';
+import 'package:kasif/firebase_options.dart';
+import 'package:kasif/pages/welcome_page.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future <void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      home: welcomePage(),
+    return MultiProvider(
+      providers: [
+        Provider <IAuthService>(
+          create: (_) => AuthService(),
+        )
+      ],
+      child: AuthWidgetBuilder(
+        onPageBuilder: (context, AsyncSnapshot<AppUser?> snapShot) =>MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          home: AuthWidget(snapShot: snapShot,),
+        ),
+      ),
     );
   }
 }

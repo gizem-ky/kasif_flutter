@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "976973197594",
+    "project_id": "kasif-888",
+    "storage_bucket": "kasif-888.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976973197594:android:c504e91c025f7dfd0dbca3",
+        "android_client_info": {
+          "package_name": "com.example.kasif"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976973197594-pk4vk00od3p0kt97vlsrhm63ubida282.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3CLQa7WeJ5K4GfZnDA056zkpEwvyT8Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976973197594-pk4vk00od3p0kt97vlsrhm63ubida282.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

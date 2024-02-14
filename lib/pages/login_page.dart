@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
-import 'package:kasif/pages/register-page.dart';
+import 'package:kasif/pages/register_page.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

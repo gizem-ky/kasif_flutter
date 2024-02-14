@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kasif/pages/login-page.dart';
-import 'package:kasif/pages/register-page.dart';
+import 'package:kasif/pages/login_page.dart';
+import 'package:kasif/pages/register_page.dart';
 
 class welcomePage extends StatefulWidget {
   const welcomePage({super.key});
@@ -100,3 +100,11 @@ Widget buildLoginBtn() {
     );
   }
 }
+
+
+/*
+Platform  Firebase App Id
+web       1:976973197594:web:cb2ca5b4d02746330dbca3
+android   1:976973197594:android:c504e91c025f7dfd0dbca3
+ios       1:976973197594:ios:72e8c1ffeb1777cc0dbca3
+*/
