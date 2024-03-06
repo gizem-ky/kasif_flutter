@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
+import 'package:kasif/core/service/i_auth_service.dart';
 import 'package:kasif/pages/register_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,6 +12,8 @@ class LoginScreen extends StatefulWidget {
 
 
 class _LoginScreenState extends State<LoginScreen> {
+   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   bool isRememberMe = false;
 
@@ -41,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         height: 60,
         child: TextField(
+          controller: _emailController,
           keyboardType: TextInputType.emailAddress,
           style: TextStyle(
             color: Colors.black87
@@ -91,6 +96,7 @@ Widget buildPassword() {
         ),
         height: 60,
         child: TextField(
+          controller: _passwordController,
           obscureText: true,
           style: TextStyle(
             color: Colors.black87
@@ -160,11 +166,14 @@ Widget buildRememberCb() {
 }
 
 Widget buildLoginBtn() {
+  final _authService = Provider.of<IAuthService>(context, listen: false);
   return Container(
     padding: EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () => print("Login Pressed"),
+      onPressed: () {
+        _authService.signInEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+      },
       child: Text("LOGIN"),
     ),
     );

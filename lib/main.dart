@@ -6,6 +6,10 @@ import 'package:kasif/core/service/i_auth_service.dart';
 import 'package:kasif/core/widgets/auth_widget.dart';
 import 'package:kasif/core/widgets/auth_widget_builder.dart';
 import 'package:kasif/firebase_options.dart';
+import 'package:kasif/pages/home_page.dart';
+import 'package:kasif/pages/map_page.dart';
+import 'package:kasif/pages/more_page.dart';
+import 'package:kasif/pages/places.dart';
 import 'package:kasif/pages/welcome_page.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +34,11 @@ class MyApp extends StatelessWidget {
         onPageBuilder: (context, AsyncSnapshot<AppUser?> snapShot) =>MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          home: AuthWidget(snapShot: snapShot,),
+          //home: AuthWidget(snapShot: snapShot,),
+          //home: MapPage(),
+          //home: Places(),
+          home: HomePage(),
+          //home: MorePage(),
         ),
       ),
     );

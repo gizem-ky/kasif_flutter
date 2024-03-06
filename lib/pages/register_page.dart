@@ -171,10 +171,9 @@ Widget buildSignUpBtn() {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
-    child: MaterialButton(
-      onPressed: () async {
-        await _authService.createUserWithEmailAndPassword(
-          email: "gizem@gmail.com", password: "123456789");
+    child: ElevatedButton(
+      onPressed: () {
+         _authService.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text, confirmPassword: _confirmPasswordController.text);
       },
       child: Text("SIGN-UP"),
     ),
