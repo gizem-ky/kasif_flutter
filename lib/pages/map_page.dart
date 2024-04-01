@@ -1,23 +1,23 @@
+// MapPage
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+  final dynamic locationModel;
+
+  const MapPage({Key? key, required this.locationModel}) : super(key: key);
 
   @override
   State<MapPage> createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
-  Location _locationController = Location();
+  final Location _locationController = Location();
   final Completer<GoogleMapController> _mapController = Completer<GoogleMapController>();
 
-  static const LatLng _pGooglePlex = LatLng(41.213614, 32.6560725);
-  static const LatLng _pApplePark = LatLng(41.2498504, 32.687776);
   LatLng? _currentP;
 
   @override
@@ -38,7 +38,7 @@ class _MapPageState extends State<MapPage> {
                 GoogleMap(
                   onMapCreated: (GoogleMapController controller) => _mapController.complete(controller),
                   initialCameraPosition: CameraPosition(
-                    target: _pGooglePlex,
+                    target: _currentP!,
                     zoom: 11.5,
                   ),
                   markers: {
@@ -50,7 +50,7 @@ class _MapPageState extends State<MapPage> {
                     Marker(
                       markerId: const MarkerId("_destinationLocation"),
                       icon: BitmapDescriptor.defaultMarker,
-                      position: _pApplePark,
+                      position: LatLng(widget.locationModel.latitude, widget.locationModel.longitude),
                     ),
                   },
                 ),
@@ -59,7 +59,7 @@ class _MapPageState extends State<MapPage> {
                   bottom: 16.0,
                   child: FloatingActionButton(
                     onPressed: () {
-                      launchGoogleMaps(_pApplePark);
+                      launchGoogleMaps(widget.locationModel.latitude, widget.locationModel.longitude);
                     },
                     child: const Icon(Icons.navigation),
                   ),
@@ -71,30 +71,30 @@ class _MapPageState extends State<MapPage> {
 
   Future<void> _cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await _mapController.future;
-    final CameraPosition _newCameraPosition = CameraPosition(
+    final CameraPosition newCameraPosition = CameraPosition(
       target: pos,
       zoom: 13,
     );
     await controller.animateCamera(
-      CameraUpdate.newCameraPosition(_newCameraPosition),
+      CameraUpdate.newCameraPosition(newCameraPosition),
     );
   }
 
   Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
-    _serviceEnabled = await _locationController.serviceEnabled();
-    if (_serviceEnabled) {
-      _serviceEnabled = await _locationController.requestService();
+    serviceEnabled = await _locationController.serviceEnabled();
+    if (serviceEnabled) {
+      serviceEnabled = await _locationController.requestService();
     } else {
       return;
     }
 
-    _permissionGranted = await _locationController.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _locationController.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await _locationController.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await _locationController.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         return;
       }
     }
@@ -109,9 +109,11 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  void launchGoogleMaps(LatLng destination) async {
-    final String googleMapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=${destination.latitude},${destination.longitude}';
+  void launchGoogleMaps(double latitude, double longitude) async {
+    final String googleMapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
+    // ignore: deprecated_member_use
     if (await canLaunch(googleMapsUrl)) {
+      // ignore: deprecated_member_use
       await launch(googleMapsUrl);
     } else {
       throw 'Could not launch $googleMapsUrl';

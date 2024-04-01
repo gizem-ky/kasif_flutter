@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:kasif/core/model/app_user.dart';
 import 'package:kasif/core/service/firebase_service.dart';
 import 'package:kasif/core/service/i_auth_service.dart';
-import 'package:kasif/core/widgets/auth_widget.dart';
 import 'package:kasif/core/widgets/auth_widget_builder.dart';
 import 'package:kasif/firebase_options.dart';
-import 'package:kasif/pages/home_page.dart';
-import 'package:kasif/pages/map_page.dart';
-import 'package:kasif/pages/more_page.dart';
-import 'package:kasif/pages/places.dart';
-import 'package:kasif/pages/welcome_page.dart';
+import 'package:kasif/pages/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 Future <void> main() async{
@@ -31,13 +26,13 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: AuthWidgetBuilder(
-        onPageBuilder: (context, AsyncSnapshot<AppUser?> snapShot) =>MaterialApp(
+        onPageBuilder: (context, AsyncSnapshot<AppUser?> snapShot) =>const MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           //home: AuthWidget(snapShot: snapShot,),
           //home: MapPage(),
           //home: Places(),
-          home: HomePage(),
+          home: HomeScreen(),
           //home: MorePage(),
         ),
       ),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/gestures.dart';
 import 'package:kasif/core/service/i_auth_service.dart';
-import 'package:kasif/pages/register_page.dart';
+import 'package:kasif/pages/login/register_page.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {

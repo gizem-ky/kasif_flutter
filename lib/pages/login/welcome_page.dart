@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kasif/pages/login_page.dart';
-import 'package:kasif/pages/register_page.dart';
+import 'package:kasif/pages/login/login_page.dart';
+import 'package:kasif/pages/login/register_page.dart';
 
 class welcomePage extends StatefulWidget {
   const welcomePage({super.key});
